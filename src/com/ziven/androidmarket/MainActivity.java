@@ -1,7 +1,6 @@
 package com.ziven.androidmarket;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.Menu;
 
