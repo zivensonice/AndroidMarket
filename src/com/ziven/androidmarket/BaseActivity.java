@@ -4,8 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
 /**
- * @author Ziven 
- * 基类 所有类的基类
+ * @author Ziven 基类 所有类的基类
  */
 public abstract class BaseActivity extends ActionBarActivity {
 
@@ -31,4 +30,5 @@ public abstract class BaseActivity extends ActionBarActivity {
 	 * 初始化导航栏
 	 */
 	protected abstract void initActionBar();
+
 }
