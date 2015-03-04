@@ -1,0 +1,7 @@
+2015/3/4
+1.报错,需要找到Theme.Compat 系列组件
+	修改styles里面BaseApp主题为Theme.Compat.Light.注意V11和V14两个包也需要修改
+2.配置文件中找不到Application
+	配置Application中的属性  android:name="com.ziven.androidmarket.BaseApplication"
+3.drawable文件,状态背景选择器中有4中状态分别对应什么
+	selected,focused,pressed,window_focused,enable   同时对应通过StateList代码中动态设置
