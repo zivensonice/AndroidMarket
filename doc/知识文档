@@ -5,3 +5,7 @@
 	配置Application中的属性  android:name="com.ziven.androidmarket.BaseApplication"
 3.drawable文件,状态背景选择器中有4中状态分别对应什么
 	selected,focused,pressed,window_focused,enable   同时对应通过StateList代码中动态设置
+4.ActionBar  SetHomeButtonEnabled  SetDisplayHomeAsUpEnabled  setDisplayShowTitleEnable
+	分别表示设置ActionBar指示部分图片和问题能否点击
+	设置是否显示指示器图片
+	设置是否显示指示器文字 也就是APP的名称

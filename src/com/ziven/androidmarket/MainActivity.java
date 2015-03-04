@@ -1,10 +1,15 @@
 package com.ziven.androidmarket;
 
+import ziven.ui.widget.PagerTab;
+
+import com.ziven.androidmarket.utils.UIUtils;
+
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.DrawerLayout.DrawerListener;
@@ -41,7 +46,6 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener {
 
 	@Override
 	protected void init() {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -50,8 +54,13 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener {
 		setContentView(R.layout.activity_main);
 		// 找到侧滑菜单的ID
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+		// 设置侧滑菜单的监听器
 		mDrawerLayout.setDrawerListener(new MyDrawerListener());
-
+		PagerTab tabs = (PagerTab) findViewById(R.id.tabs);
+		ViewPager pager = (ViewPager) findViewById(R.id.pager);
+		// ViewPagerAdapter adapter = new
+		// ViewPagerAdapter(getSupportFragmentManager());
+		// pager.setAdapter(adapter);
 	}
 
 	@Override
@@ -59,9 +68,11 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener {
 		// 获取到包里面的actionbar
 		mActionBar = getSupportActionBar();
 		mActionBar.setTitle(R.string.app_name);
+		// 设置Actionbar指示部分能否点击
 		mActionBar.setHomeButtonEnabled(true);
-		// TODO试验这两个函数的用处
+		// 显示图标
 		mActionBar.setDisplayHomeAsUpEnabled(true);
+		// 显示APP名称
 		mActionBar.setDisplayShowTitleEnabled(true);
 		mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer_am,
 				R.string.drawer_open, R.string.drawer_close);
@@ -94,23 +105,28 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener {
 
 	private class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
+		private String[] tab_names;
+
 		private ViewPagerAdapter(FragmentManager fm) {
 			super(fm);
+			// 初始化指示控件标题名称
+			tab_names = UIUtils.getsStringArray(R.array.tab_names);
 		}
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			return super.getPageTitle(position);
+			return tab_names[position];
 		}
 
 		@Override
 		public Fragment getItem(int position) {
+			// TODO:添加item实例
 			return null;
 		}
 
 		@Override
 		public int getCount() {
-			return 0;
+			return tab_names.length;
 		}
 
 	}
