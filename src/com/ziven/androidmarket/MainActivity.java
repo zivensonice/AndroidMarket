@@ -35,7 +35,8 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		return mActionBarDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
+		return mActionBarDrawerToggle.onOptionsItemSelected(item)
+				|| super.onOptionsItemSelected(item);
 	}
 
 	@Override
@@ -46,6 +47,7 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener {
 
 	@Override
 	protected void init() {
+		setContentView(R.layout.activity_main);
 
 	}
 
@@ -74,8 +76,9 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener {
 		mActionBar.setDisplayHomeAsUpEnabled(true);
 		// 显示APP名称
 		mActionBar.setDisplayShowTitleEnabled(true);
-		mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer_am,
-				R.string.drawer_open, R.string.drawer_close);
+		mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+				R.drawable.ic_drawer_am, R.string.drawer_open,
+				R.string.drawer_close);
 		mActionBarDrawerToggle.syncState();
 	}
 
