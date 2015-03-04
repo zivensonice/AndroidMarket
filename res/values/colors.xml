@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 主页背景色 -->
+    <color name="bg_page">#ffebebeb</color>
+    <!-- 指针控件聚焦和按下颜色 -->
+    <color name="bg_tab_pressed">#6633b5e5</color>
+    <!-- 标题颜色 -->
+    <color name="txt_title">#ff333333</color>
+    <!-- 小文本颜色 -->
+    <color name="txt_small">#ff7a7a7a</color>
+    <color name="txt_big">#ff717171</color>
+    <!-- 指示控件 分割线颜色 -->
+    <color name="item_divider">#ffd7d7d7</color>
+    <!-- 详情背景色 -->
+    <color name="detail_screen_bg">#adadad</color>
+    <!-- 进度条颜色 -->
+    <color name="progress">#0294f0</color>
+    <!-- 菜单选项正常颜色 -->
+    <color name="menu_bg_normal">#f0f1f3</color>
+    <!-- 菜单选项选中颜色 -->
+    <color name="menu_bg_press">#cecece</color>
+</resources>

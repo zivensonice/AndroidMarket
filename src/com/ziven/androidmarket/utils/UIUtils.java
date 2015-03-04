@@ -99,7 +99,7 @@ public class UIUtils {
 	}
 
 	// 获取颜色选择器
-	public static ColorStateList getcolorColorStateList(int resID) {
+	public static ColorStateList getColorStateList(int resID) {
 		return getResources().getColorStateList(resID);
 	}
 
