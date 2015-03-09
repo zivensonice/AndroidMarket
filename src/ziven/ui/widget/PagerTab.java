@@ -133,7 +133,7 @@ public class PagerTab extends ViewGroup {
 		mDividerPaint.setColor(mDividerColor);
 	}
 
-	/** 设置ViewPager */
+	/** 设置ViewPager 和他的指针进行绑定 */
 	public void setViewPager(ViewPager viewPager) {
 		if (viewPager == null || viewPager.getAdapter() == null) {
 			throw new IllegalStateException("ViewPager is null or ViewPager does not have adapter instance.");
