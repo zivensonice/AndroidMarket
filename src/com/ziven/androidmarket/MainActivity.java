@@ -2,6 +2,8 @@ package com.ziven.androidmarket;
 
 import ziven.ui.widget.PagerTab;
 
+import com.ziven.androidmarket.fragment.BaseFragment;
+import com.ziven.androidmarket.fragment.FragmentFactory;
 import com.ziven.androidmarket.utils.UIUtils;
 
 import android.os.Bundle;
@@ -60,9 +62,14 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener {
 		mDrawerLayout.setDrawerListener(new MyDrawerListener());
 		PagerTab tabs = (PagerTab) findViewById(R.id.tabs);
 		ViewPager pager = (ViewPager) findViewById(R.id.pager);
-		// ViewPagerAdapter adapter = new
-		// ViewPagerAdapter(getSupportFragmentManager());
-		// pager.setAdapter(adapter);
+		// 设置ViewPager适配器
+		ViewPagerAdapter adapter = new ViewPagerAdapter(
+				getSupportFragmentManager());
+		pager.setAdapter(adapter);
+		// 把ViewPager和他的指针进行绑定
+		tabs.setViewPager(pager);
+		// 因为MainActivity实现了OnPageChangeListener监听接口,所以可以使用this
+		tabs.setOnPageChangeListener(this);
 	}
 
 	@Override
@@ -79,6 +86,10 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener {
 		mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
 				R.drawable.ic_drawer_am, R.string.drawer_open,
 				R.string.drawer_close);
+		mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+				R.drawable.ic_drawer_am, R.string.drawer_open,
+				R.string.drawer_close);
+		// 关联同步
 		mActionBarDrawerToggle.syncState();
 	}
 
@@ -124,7 +135,7 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener {
 		@Override
 		public Fragment getItem(int position) {
 			// TODO:添加item实例
-			return null;
+			return FragmentFactory.createFragment(position);
 		}
 
 		@Override
@@ -135,17 +146,19 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener {
 	}
 
 	@Override
-	public void onPageScrollStateChanged(int arg0) {
+	public void onPageScrolled(int position, float positionOffset,
+			int positionOffsetPixels) {
 
 	}
 
 	@Override
-	public void onPageScrolled(int arg0, float arg1, int arg2) {
+	public void onPageSelected(int position) {
 
 	}
 
 	@Override
-	public void onPageSelected(int arg0) {
-
+	public void onPageScrollStateChanged(int state) {
+		BaseFragment fragment = FragmentFactory.createFragment(state);
 	}
+
 }

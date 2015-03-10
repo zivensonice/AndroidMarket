@@ -9,3 +9,7 @@
 	分别表示设置ActionBar指示部分图片和问题能否点击
 	设置是否显示指示器图片
 	设置是否显示指示器文字 也就是APP的名称
+5.提示错误,找不到XXX.Activity
+	看看Private Library的包导入是否正确,也就是是否是Referenced Library里面的包
+6.源码关联错误
+	移除Private Library,然后在Order and Export中,勾选Refrenced中的Library包 
