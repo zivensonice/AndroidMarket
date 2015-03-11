@@ -20,7 +20,7 @@
     <style name="ProgressBarBig">
         <item name="android:indeterminateDrawable">@drawable/process_big</item>
         <item name="android:indeterminateOnly">true</item>
-        <item name="android:maxLength">48dip</item>
+        <item name="android:maxHeight">48dip</item>
         <item name="android:maxWidth">48dip</item>
         <item name="android:minWidth">48dip</item>
         <item name="android:minHeight">48dip</item>
@@ -31,7 +31,7 @@
     <style name="ProgressBarSmall">
         <item name="android:indeterminateDrawable">@drawable/process_small</item>
         <item name="android:indeterminateOnly">true</item>
-        <item name="android:maxLength">20dip</item>
+        <item name="android:maxHeight">20dip</item>
         <item name="android:maxWidth">20dip</item>
         <item name="android:minWidth">20dip</item>
         <item name="android:minHeight">20dip</item>
