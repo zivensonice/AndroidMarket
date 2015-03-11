@@ -76,6 +76,10 @@ public class ThreadManager {
 		}
 	}
 
+	/**
+	 * @author Ziven 
+	 * <li>线程池简单封装类
+	 */
 	public static class ThreadPoolProxy {
 		/* 任务管理池 */
 		private ThreadPoolExecutor mPool;

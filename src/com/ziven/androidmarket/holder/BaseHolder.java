@@ -1,5 +1,7 @@
 package com.ziven.androidmarket.holder;
 
+import com.ziven.androidmarket.http.image.ImageLoader;
+
 import android.view.View;
 import android.widget.ImageView;
 
