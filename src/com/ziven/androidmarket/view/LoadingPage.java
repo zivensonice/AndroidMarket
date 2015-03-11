@@ -1,4 +1,4 @@
-package com.ziven.androidmarket.fragment;
+package com.ziven.androidmarket.view;
 
 import com.ziven.androidmarket.R;
 import com.ziven.androidmarket.utils.UIUtils;
@@ -45,35 +45,29 @@ public abstract class LoadingPage extends FrameLayout {
 		/* 创建初始化加载状态视图 */
 		mLoadingView = createLoadingView();
 		if (null != mLoadingView) {
-			addView(mLoadingView, new LayoutParams(LayoutParams.MATCH_PARENT,
-					LayoutParams.MATCH_PARENT));
+			addView(mLoadingView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 		}
 		mErrorView = createErrorView();
 		if (null != mErrorView) {
-			addView(mErrorView, new LayoutParams(LayoutParams.MATCH_PARENT,
-					LayoutParams.MATCH_PARENT));
+			addView(mErrorView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 		}
 		mEmptyView = createEmptyView();
 		if (null != mEmptyView) {
-			addView(mEmptyView, new LayoutParams(LayoutParams.MATCH_PARENT,
-					LayoutParams.MATCH_PARENT));
+			addView(mEmptyView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 		}
 		showPageSafe();
 	}
 
 	protected View createLoadingView() {
-		// TODO 返回加载布局
-		return null;
+		return UIUtils.inflate(R.layout.loading_page_loading);
 	}
 
 	protected View createEmptyView() {
-		// TODO
-		return null;
+		return UIUtils.inflate(R.layout.loading_page_empty);
 	}
 
 	protected View createErrorView() {
-		// TODO
-		return null;
+		return UIUtils.inflate(R.layout.loading_page_error);
 	}
 
 	class LoadingTask implements Runnable {
@@ -96,26 +90,22 @@ public abstract class LoadingPage extends FrameLayout {
 	/* 显示对应的View */
 	private void showPage() {
 		if (null != mLoadingView) {
-			mLoadingView.setVisibility(mState == STATE_UNLOADED
-					| mState == STATE_LOADING ? View.VISIBLE : View.INVISIBLE);
+			mLoadingView.setVisibility(mState == STATE_UNLOADED | mState == STATE_LOADING ? View.VISIBLE
+					: View.INVISIBLE);
 		}
 		if (null != mErrorView) {
-			mErrorView.setVisibility(mState == STATE_ERROR ? View.VISIBLE
-					: View.INVISIBLE);
+			mErrorView.setVisibility(mState == STATE_ERROR ? View.VISIBLE : View.INVISIBLE);
 		}
 		if (null != mEmptyView) {
-			mErrorView.setVisibility(mState == STATE_EMPTY ? View.VISIBLE
-					: View.INVISIBLE);
+			mErrorView.setVisibility(mState == STATE_EMPTY ? View.VISIBLE : View.INVISIBLE);
 		}
 		// 只有数据成功返回了,才知道成功的View该如何显示,因为该View的显示依赖加载完毕的数据
 		if (mState == STATE_SUCCEED && mSucceedView == null) {
 			mSucceedView = createLoadedView();
-			addView(mSucceedView, new LayoutParams(LayoutParams.MATCH_PARENT,
-					LayoutParams.MATCH_PARENT));
+			addView(mSucceedView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 		}
 		if (null != mSucceedView) {
-			mSucceedView.setVisibility(mState == STATE_SUCCEED ? View.VISIBLE
-					: View.INVISIBLE);
+			mSucceedView.setVisibility(mState == STATE_SUCCEED ? View.VISIBLE : View.INVISIBLE);
 		}
 	}
 
@@ -135,6 +125,7 @@ public abstract class LoadingPage extends FrameLayout {
 
 	public abstract LoadResult load();
 
+	/* 页面状态 */
 	public enum LoadResult {
 		ERROR(2), EMPTY(3), SUCCEED(4);
 		int value;
@@ -148,15 +139,18 @@ public abstract class LoadingPage extends FrameLayout {
 		}
 	}
 
+	/* 是否需要重置 */
 	public boolean needReset() {
 		return mState == STATE_ERROR || mState == STATE_EMPTY;
 	}
 
+	/* 重置Page状态 */
 	public void reset() {
 		mState = STATE_UNLOADED;
 		showPageSafe();
 	}
 
+	/* 暴露给外界,show Page的方法 */
 	public synchronized void show() {
 		if (needReset()) {
 			mState = STATE_UNLOADED;

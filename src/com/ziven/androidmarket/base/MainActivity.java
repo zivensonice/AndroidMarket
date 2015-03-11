@@ -1,9 +1,17 @@
-package com.ziven.androidmarket;
+package com.ziven.androidmarket.base;
 
 import ziven.ui.widget.PagerTab;
 
+import com.ziven.androidmarket.R;
+import com.ziven.androidmarket.R.array;
+import com.ziven.androidmarket.R.drawable;
+import com.ziven.androidmarket.R.id;
+import com.ziven.androidmarket.R.layout;
+import com.ziven.androidmarket.R.menu;
+import com.ziven.androidmarket.R.string;
 import com.ziven.androidmarket.fragment.BaseFragment;
 import com.ziven.androidmarket.fragment.FragmentFactory;
+import com.ziven.androidmarket.holder.MenuHolder;
 import com.ziven.androidmarket.utils.UIUtils;
 
 import android.os.Bundle;
@@ -11,6 +19,7 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v4.widget.DrawerLayout;
@@ -19,6 +28,7 @@ import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 
 /**
  * @author Ziven
@@ -26,8 +36,8 @@ import android.view.View;
  */
 public class MainActivity extends BaseActivity implements OnPageChangeListener {
 
-	private ActionBar mActionBar;
 	private DrawerLayout mDrawerLayout;
+	private ActionBar mActionBar;
 	private ActionBarDrawerToggle mActionBarDrawerToggle;
 
 	@Override
@@ -37,8 +47,7 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		return mActionBarDrawerToggle.onOptionsItemSelected(item)
-				|| super.onOptionsItemSelected(item);
+		return mActionBarDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
 	}
 
 	@Override
@@ -55,16 +64,21 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener {
 
 	@Override
 	protected void initView() {
-		setContentView(R.layout.activity_main);
-		// 找到侧滑菜单的ID
+		// setContentView(R.layout.activity_main);
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-		// 设置侧滑菜单的监听器
 		mDrawerLayout.setDrawerListener(new MyDrawerListener());
+		// 设置阴影
+		mDrawerLayout.setDrawerShadow(R.drawable.ic_drawer_shadow, GravityCompat.START);
+		// 菜单
+		FrameLayout mDrawer = (FrameLayout) findViewById(R.id.start_drawer);
+		MenuHolder mMenuHolder = new MenuHolder();
+		mDrawer.addView(mMenuHolder.getRootView());
+		// 指针控件
 		PagerTab tabs = (PagerTab) findViewById(R.id.tabs);
+		// 子页面内容
 		ViewPager pager = (ViewPager) findViewById(R.id.pager);
 		// 设置ViewPager适配器
-		ViewPagerAdapter adapter = new ViewPagerAdapter(
-				getSupportFragmentManager());
+		ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 		pager.setAdapter(adapter);
 		// 把ViewPager和他的指针进行绑定
 		tabs.setViewPager(pager);
@@ -83,12 +97,10 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener {
 		mActionBar.setDisplayHomeAsUpEnabled(true);
 		// 显示APP名称
 		mActionBar.setDisplayShowTitleEnabled(true);
-		mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-				R.drawable.ic_drawer_am, R.string.drawer_open,
-				R.string.drawer_close);
-		mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-				R.drawable.ic_drawer_am, R.string.drawer_open,
-				R.string.drawer_close);
+		mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer_am,
+				R.string.drawer_open, R.string.drawer_close);
+		mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer_am,
+				R.string.drawer_open, R.string.drawer_close);
 		// 关联同步
 		mActionBarDrawerToggle.syncState();
 	}
@@ -134,7 +146,6 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener {
 
 		@Override
 		public Fragment getItem(int position) {
-			// TODO:添加item实例
 			return FragmentFactory.createFragment(position);
 		}
 
@@ -146,8 +157,7 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener {
 	}
 
 	@Override
-	public void onPageScrolled(int position, float positionOffset,
-			int positionOffsetPixels) {
+	public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
 	}
 
@@ -159,6 +169,7 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener {
 	@Override
 	public void onPageScrollStateChanged(int state) {
 		BaseFragment fragment = FragmentFactory.createFragment(state);
+		fragment.show();
 	}
 
 }

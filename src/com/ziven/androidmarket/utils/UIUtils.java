@@ -1,6 +1,6 @@
 package com.ziven.androidmarket.utils;
 
-import com.ziven.androidmarket.BaseApplication;
+import com.ziven.androidmarket.base.BaseApplication;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.Process;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * @类名:UIUtils

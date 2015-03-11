@@ -1,4 +1,4 @@
-package com.ziven.androidmarket;
+package com.ziven.androidmarket.base;
 
 import android.app.Application;
 import android.os.Handler;
