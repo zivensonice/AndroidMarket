@@ -1,5 +1,7 @@
 package com.ziven.androidmarket.holder;
 
-public class MenuHolder {
+import android.content.DialogInterface.OnClickListener;
 
+public class MenuHolder extends BaseHolder<UserInfo> implements OnClickListener {
+	
 }

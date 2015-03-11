@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/photo_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:background="@drawable/menu_icon_bg"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" >
+
+            <ImageView
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:padding="5dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/bg_photo" />
+
+            <ImageView
+                android:id="@+id/photo_iv"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/photo_over" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/photo_iv"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="@string/tv_user_name"
+                    android:textColor="#2b2b2b"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/user_name"
+                    android:singleLine="true"
+                    android:text="@string/tv_user_email"
+                    android:textColor="#7a7a7a"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="#1a000000" />
+
+        <RelativeLayout
+            android:id="@+id/home_layout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/menu_item_bg" 
+            android:paddingLeft="15dp">
+        </RelativeLayout>
+    </LinearLayout>
+
+</ScrollView>
