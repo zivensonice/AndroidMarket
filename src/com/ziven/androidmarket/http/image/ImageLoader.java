@@ -37,7 +37,8 @@ public class ImageLoader {
 
 	private static BitmapFactory.Options mOptions = new BitmapFactory.Options();
 	/* 图片下载线程池 */
-	private static ThreadPoolProxy mThreadPool = ThreadManager.getSinglePool(THREAD_POOL_NAME);
+	private static ThreadPoolProxy mThreadPool = ThreadManager
+			.getSinglePool(THREAD_POOL_NAME);
 	/* 用于记录图片下载任务,以便取消 */
 	private static ConcurrentHashMap<String, Runnable> mMapRunnable = new ConcurrentHashMap<String, Runnable>();
 	/* 图片的总大小 */
@@ -82,7 +83,7 @@ public class ImageLoader {
 			}
 		};
 		// 取消下载
-		cancle(url);
+		cancel(url);
 		// 放入缓存
 		mMapRunnable.put(url, runnable);
 		// 执行任务
@@ -114,7 +115,8 @@ public class ImageLoader {
 				// 而且图片一定要进行完整性校验
 
 				// 可以避免OOM 比起decodeStream和decodeFile
-				bitmap = BitmapFactory.decodeFileDescriptor(fis.getFD(), null, mOptions);
+				bitmap = BitmapFactory.decodeFileDescriptor(fis.getFD(), null,
+						mOptions);
 			}
 			if (null != bitmap) {
 				drawable = new BitmapDrawable(UIUtils.getResources(), bitmap);
@@ -134,8 +136,12 @@ public class ImageLoader {
 		return drawable;
 	}
 
-	private static void cancle(String url) {
-		//TODO 取消下载
+	/* 取消下载 */
+	public static void cancel(String url) {
+		Runnable runnable = mMapRunnable.remove(url);
+		if (null != runnable) {
+			mThreadPool.cancel(runnable);
+		}
 	}
 
 	/**
@@ -146,7 +152,8 @@ public class ImageLoader {
 	 *            用来校验设置图片是否安全
 	 * @param drawable
 	 */
-	private static void setImageSafe(final ImageView view, final String url, final Drawable drawable) {
+	private static void setImageSafe(final ImageView view, final String url,
+			final Drawable drawable) {
 		if (null == drawable && null == view.getTag()) {
 			return;
 		}
@@ -185,7 +192,8 @@ public class ImageLoader {
 		mKeyCache.remove(url);
 		mDrawableCache.remove(url);
 		// 如果大于等于100张,或者图片的总数大于应用总内存的1/4,先删除最前面的
-		while (mKeyCache.size() >= MAX_DRAWABLE_COUNT || mTotalSize >= SystemUtils.getOneAppMaxMemory() / 4) {
+		while (mKeyCache.size() >= MAX_DRAWABLE_COUNT
+				|| mTotalSize >= SystemUtils.getOneAppMaxMemory() / 4) {
 			String firstUrl = mKeyCache.remove();
 			Drawable remove = mDrawableCache.remove(firstUrl);
 			mTotalSize -= DrawableUtils.getDrawableSize(remove);

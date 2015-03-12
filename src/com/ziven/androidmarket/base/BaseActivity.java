@@ -90,7 +90,13 @@ public abstract class BaseActivity extends ActionBarActivity {
 
 	/* 获取栈顶Activity */
 	public static BaseActivity getStackTopActivity() {
-		// TODO:
+		List<BaseActivity> copy;
+		synchronized (mActivities) {
+			copy = new ArrayList<BaseActivity>(mActivities);
+		}
+		if (copy.size() > 0) {
+			return copy.get(copy.size() - 1);
+		}
 		return null;
 	}
 

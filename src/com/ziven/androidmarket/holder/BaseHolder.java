@@ -10,7 +10,7 @@ public abstract class BaseHolder<T> {
 	protected int mPosition;
 	protected T t;
 
-	private BaseHolder(View mRootView, int mPosition, T t) {
+	public BaseHolder() {
 		mRootView = initView();
 		// 设置数据绑定
 		mRootView.setTag(this);
@@ -30,6 +30,7 @@ public abstract class BaseHolder<T> {
 
 	public void setT(T t) {
 		this.t = t;
+		refreshView();
 	}
 
 	public View getmRootView() {
