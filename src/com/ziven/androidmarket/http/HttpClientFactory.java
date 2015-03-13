@@ -43,13 +43,10 @@ public class HttpClientFactory {
 		if (isHttps) {
 			// 支持https和http
 			SchemeRegistry schemeRegistry = new SchemeRegistry();
-			schemeRegistry.register(new Scheme("http", PlainSocketFactory
-					.getSocketFactory(), 80));
-			schemeRegistry.register(new Scheme("https",
-					org.apache.http.conn.ssl.SSLSocketFactory
-							.getSocketFactory(), 443));
-			ThreadSafeClientConnManager cm = new ThreadSafeClientConnManager(
-					params, schemeRegistry);
+			schemeRegistry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
+			schemeRegistry.register(new Scheme("https", org.apache.http.conn.ssl.SSLSocketFactory.getSocketFactory(),
+					443));
+			ThreadSafeClientConnManager cm = new ThreadSafeClientConnManager(params, schemeRegistry);
 			httpClient = new DefaultHttpClient(cm, params);
 		} else {
 			httpClient = new DefaultHttpClient(params);
@@ -80,8 +77,7 @@ public class HttpClientFactory {
 		// 设置超时
 		ConnManagerParams.setTimeout(params, TIME_OUT);
 		// 设置多线程最大连接数
-		ConnManagerParams.setMaxConnectionsPerRoute(params,
-				new ConnPerRouteBean(MAX_CONNECTIONS));
+		ConnManagerParams.setMaxConnectionsPerRoute(params, new ConnPerRouteBean(MAX_CONNECTIONS));
 		// 多线程总连接数
 		ConnManagerParams.setMaxTotalConnections(params, 10);
 		return params;
@@ -104,5 +100,6 @@ public class HttpClientFactory {
 			return -1;
 		}
 
+		// TODO:3-12
 	}
 }

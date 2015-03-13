@@ -72,7 +72,7 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener {
 		// 菜单
 		FrameLayout mDrawer = (FrameLayout) findViewById(R.id.start_drawer);
 		MenuHolder mMenuHolder = new MenuHolder();
-		mDrawer.addView(mMenuHolder.getRootView());
+//		mDrawer.addView(mMenuHolder.getRootView());
 		// 指针控件
 		PagerTab tabs = (PagerTab) findViewById(R.id.tabs);
 		// 子页面内容
