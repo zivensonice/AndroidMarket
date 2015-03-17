@@ -1,4 +1,4 @@
-package com.ziven.androidmarket.holder;
+package com.ziven.androidmarket.ui.holder;
 
 import com.ziven.androidmarket.R;
 import com.ziven.androidmarket.http.image.ImageLoader;

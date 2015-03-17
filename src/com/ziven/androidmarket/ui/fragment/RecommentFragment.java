@@ -1,10 +1,10 @@
-package com.ziven.androidmarket.fragment;
+package com.ziven.androidmarket.ui.fragment;
 
 import android.view.View;
 
-import com.ziven.androidmarket.view.LoadingPage.LoadResult;
+import com.ziven.androidmarket.ui.view.LoadingPage.LoadResult;
 
-public class AppFragment extends BaseFragment {
+public class RecommentFragment extends BaseFragment {
 
 	@Override
 	protected View createSucceedView() {

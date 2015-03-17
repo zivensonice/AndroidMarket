@@ -1,7 +1,7 @@
-package ziven.ui.widget;
+package com.ziven.androidmarket.ui.widget;
 
 import com.ziven.androidmarket.R;
-import com.ziven.androidmarket.base.BaseActivity;
+import com.ziven.androidmarket.ui.activity.BaseActivity;
 import com.ziven.androidmarket.utils.UIUtils;
 
 import android.content.Context;

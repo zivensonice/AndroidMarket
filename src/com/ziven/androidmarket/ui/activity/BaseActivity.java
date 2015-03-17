@@ -1,4 +1,4 @@
-package com.ziven.androidmarket.base;
+package com.ziven.androidmarket.ui.activity;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

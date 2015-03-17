@@ -1,4 +1,4 @@
-package com.ziven.androidmarket.view;
+package com.ziven.androidmarket.ui.view;
 
 import com.ziven.androidmarket.R;
 import com.ziven.androidmarket.utils.UIUtils;

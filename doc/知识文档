@@ -13,3 +13,10 @@
 	看看Private Library的包导入是否正确,也就是是否是Referenced Library里面的包
 6.源码关联错误
 	移除Private Library,然后在Order and Export中,勾选Refrenced中的Library包 
+7.RadioButton 设置android:button="@null"属性,这个属性可以取消RadioButton前面的 点
+8.当git pull出现冲突,提示Merge出现错误
+	git stash 把本地更改储存在临时栈里面
+	git pull 把远程代码更新到本地
+	git stash pop 本地代码出栈
+	git diff 查看更改,然后手动合并代码
+	git push 推送到远端

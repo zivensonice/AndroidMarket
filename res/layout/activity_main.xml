@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <ziven.ui.widget.PagerTab
+    <com.ziven.androidmarket.ui.widget.PagerTab
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="42dip"
         android:background="@drawable/bg_tab" >
-    </ziven.ui.widget.PagerTab>
+    </com.ziven.androidmarket.ui.widget.PagerTab>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"

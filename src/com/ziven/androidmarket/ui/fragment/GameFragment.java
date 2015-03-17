@@ -1,10 +1,11 @@
-package com.ziven.androidmarket.fragment;
+package com.ziven.androidmarket.ui.fragment;
+
+import com.ziven.androidmarket.ui.view.LoadingPage.LoadResult;
 
 import android.view.View;
 
-import com.ziven.androidmarket.view.LoadingPage.LoadResult;
 
-public class SubjectFragment extends BaseFragment {
+public class GameFragment extends BaseFragment {
 
 	@Override
 	protected View createSucceedView() {

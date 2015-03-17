@@ -1,6 +1,5 @@
-package com.ziven.androidmarket.base;
+package com.ziven.androidmarket.ui.activity;
 
-import ziven.ui.widget.PagerTab;
 
 import com.ziven.androidmarket.R;
 import com.ziven.androidmarket.R.array;
@@ -9,9 +8,10 @@ import com.ziven.androidmarket.R.id;
 import com.ziven.androidmarket.R.layout;
 import com.ziven.androidmarket.R.menu;
 import com.ziven.androidmarket.R.string;
-import com.ziven.androidmarket.fragment.BaseFragment;
-import com.ziven.androidmarket.fragment.FragmentFactory;
-import com.ziven.androidmarket.holder.MenuHolder;
+import com.ziven.androidmarket.ui.fragment.BaseFragment;
+import com.ziven.androidmarket.ui.fragment.FragmentFactory;
+import com.ziven.androidmarket.ui.holder.MenuHolder;
+import com.ziven.androidmarket.ui.widget.PagerTab;
 import com.ziven.androidmarket.utils.UIUtils;
 
 import android.os.Bundle;

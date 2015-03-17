@@ -1,4 +1,4 @@
-package com.ziven.androidmarket.fragment;
+package com.ziven.androidmarket.ui.fragment;
 
 import java.util.HashMap;
 

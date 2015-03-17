@@ -1,4 +1,4 @@
-package ziven.ui.widget;
+package com.ziven.androidmarket.ui.widget;
 
 import com.ziven.androidmarket.utils.UIUtils;
 

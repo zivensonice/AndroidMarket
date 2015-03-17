@@ -1,11 +1,11 @@
-package com.ziven.androidmarket.fragment;
+package com.ziven.androidmarket.ui.fragment;
 
 import java.util.List;
 
 import com.ziven.androidmarket.utils.UIUtils;
 import com.ziven.androidmarket.utils.ViewUtils;
-import com.ziven.androidmarket.view.LoadingPage;
-import com.ziven.androidmarket.view.LoadingPage.LoadResult;
+import com.ziven.androidmarket.ui.view.LoadingPage;
+import com.ziven.androidmarket.ui.view.LoadingPage.LoadResult;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
