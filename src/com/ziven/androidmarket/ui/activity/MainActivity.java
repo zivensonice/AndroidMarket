@@ -1,6 +1,5 @@
 package com.ziven.androidmarket.ui.activity;
 
-
 import com.ziven.androidmarket.R;
 import com.ziven.androidmarket.R.array;
 import com.ziven.androidmarket.R.drawable;
@@ -12,6 +11,7 @@ import com.ziven.androidmarket.ui.fragment.BaseFragment;
 import com.ziven.androidmarket.ui.fragment.FragmentFactory;
 import com.ziven.androidmarket.ui.holder.MenuHolder;
 import com.ziven.androidmarket.ui.widget.PagerTab;
+import com.ziven.androidmarket.utils.L;
 import com.ziven.androidmarket.utils.UIUtils;
 
 import android.os.Bundle;
@@ -64,26 +64,24 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener {
 
 	@Override
 	protected void initView() {
-		// setContentView(R.layout.activity_main);
+		/* 整个页面 */
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerLayout.setDrawerListener(new MyDrawerListener());
-		// 设置阴影
-		mDrawerLayout.setDrawerShadow(R.drawable.ic_drawer_shadow, GravityCompat.START);
-		// 菜单
+		mDrawerLayout.setDrawerShadow(R.drawable.ic_drawer_shadow, GravityCompat.START); // 设置阴影
+		/* 菜单 */
 		FrameLayout mDrawer = (FrameLayout) findViewById(R.id.start_drawer);
 		MenuHolder mMenuHolder = new MenuHolder();
-//		mDrawer.addView(mMenuHolder.getRootView());
-		// 指针控件
-		PagerTab tabs = (PagerTab) findViewById(R.id.tabs);
+		mDrawer.addView(mMenuHolder.getRootView());
+
 		// 子页面内容
 		ViewPager pager = (ViewPager) findViewById(R.id.pager);
-		// 设置ViewPager适配器
-		ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+		ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());// 设置ViewPager适配器
 		pager.setAdapter(adapter);
-		// 把ViewPager和他的指针进行绑定
-		tabs.setViewPager(pager);
-		// 因为MainActivity实现了OnPageChangeListener监听接口,所以可以使用this
-		tabs.setOnPageChangeListener(this);
+
+		// 指针控件
+		PagerTab tabs = (PagerTab) findViewById(R.id.tabs);
+		tabs.setViewPager(pager);// 把ViewPager和他的指针进行绑定
+		tabs.setOnPageChangeListener(this);// 因为MainActivity实现了OnPageChangeListener监听接口,所以可以使用this
 	}
 
 	@Override
@@ -141,6 +139,7 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener {
 
 		@Override
 		public CharSequence getPageTitle(int position) {
+			L.d(tab_names[position].toString());
 			return tab_names[position];
 		}
 

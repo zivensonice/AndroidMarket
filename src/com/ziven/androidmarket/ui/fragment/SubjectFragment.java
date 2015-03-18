@@ -5,10 +5,9 @@ import android.view.View;
 import com.ziven.androidmarket.ui.view.LoadingPage.LoadResult;
 
 public class SubjectFragment extends BaseFragment {
-
+	
 	@Override
 	protected View createSucceedView() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

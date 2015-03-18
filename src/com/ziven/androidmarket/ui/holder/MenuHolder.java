@@ -1,23 +1,22 @@
 package com.ziven.androidmarket.ui.holder;
 
+import java.util.List;
+
 import com.ziven.androidmarket.R;
 import com.ziven.androidmarket.http.image.ImageLoader;
+import com.ziven.androidmarket.protocol.UserProtocol;
 import com.ziven.androidmarket.utils.UIUtils;
 import com.ziven.bean.UserInfo;
 import com.ziven.manager.ThreadManager;
 
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class MenuHolder extends BaseHolder<UserInfo> implements
-		android.view.View.OnClickListener {
-	private RelativeLayout mHomeLayout, mSettingLayout, mThemeLayout,
-			mScansLayout, mFeedbackLayout, mUpdatesLayout, mAboutLayout,
-			mExitLayout, mPhotoLayout;
+public class MenuHolder extends BaseHolder<UserInfo> implements android.view.View.OnClickListener {
+	private RelativeLayout mHomeLayout, mSettingLayout, mThemeLayout, mScansLayout, mFeedbackLayout, mUpdatesLayout,
+			mAboutLayout, mExitLayout, mPhotoLayout;
 	private ImageView mPhoto;
 	private TextView mTvUserName, mTvUserEmail;
 	private UserInfo mInfo;
@@ -31,8 +30,7 @@ public class MenuHolder extends BaseHolder<UserInfo> implements
 		mHomeLayout = (RelativeLayout) view.findViewById(R.id.home_layout);
 		mHomeLayout.setOnClickListener(this);
 
-		mSettingLayout = (RelativeLayout) view
-				.findViewById(R.id.setting_layout);
+		mSettingLayout = (RelativeLayout) view.findViewById(R.id.setting_layout);
 		mSettingLayout.setOnClickListener(this);
 
 		mThemeLayout = (RelativeLayout) view.findViewById(R.id.theme_layout);
@@ -41,12 +39,10 @@ public class MenuHolder extends BaseHolder<UserInfo> implements
 		mScansLayout = (RelativeLayout) view.findViewById(R.id.scans_layout);
 		mScansLayout.setOnClickListener(this);
 
-		mFeedbackLayout = (RelativeLayout) view
-				.findViewById(R.id.feedback_layout);
+		mFeedbackLayout = (RelativeLayout) view.findViewById(R.id.feedback_layout);
 		mFeedbackLayout.setOnClickListener(this);
 
-		mUpdatesLayout = (RelativeLayout) view
-				.findViewById(R.id.updates_layout);
+		mUpdatesLayout = (RelativeLayout) view.findViewById(R.id.updates_layout);
 		mUpdatesLayout.setOnClickListener(this);
 
 		mAboutLayout = (RelativeLayout) view.findViewById(R.id.about_layout);
@@ -80,6 +76,18 @@ public class MenuHolder extends BaseHolder<UserInfo> implements
 				@Override
 				public void run() {
 					// TODO:3.13 加载协议
+					UserProtocol protocol = new UserProtocol();
+					List<UserInfo> loadInfo = protocol.load(0);
+					if (loadInfo != null && loadInfo.size() > 0) {
+						// 获取第一条数据
+						mInfo = loadInfo.get(0);
+						UIUtils.runInMainThread(new Runnable() {
+							@Override
+							public void run() {
+								refreshView();
+							}
+						});
+					}
 				}
 			});
 			break;

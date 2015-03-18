@@ -16,11 +16,11 @@ public abstract class BaseHolder<T> {
 		mRootView.setTag(this);
 	}
 
-	public int getmPosition() {
+	public int getPosition() {
 		return mPosition;
 	}
 
-	public void setmPosition(int mPosition) {
+	public void setPosition(int mPosition) {
 		this.mPosition = mPosition;
 	}
 
@@ -33,7 +33,7 @@ public abstract class BaseHolder<T> {
 		refreshView();
 	}
 
-	public View getmRootView() {
+	public View getRootView() {
 		return mRootView;
 	}
 

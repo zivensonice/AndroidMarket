@@ -20,3 +20,5 @@
 	git stash pop 本地代码出栈
 	git diff 查看更改,然后手动合并代码
 	git push 推送到远端
+	
+9 ListView setDivider设置分割线  setSelector设置背景图片样式  setCacheColorHint 快速拖动绘制背景

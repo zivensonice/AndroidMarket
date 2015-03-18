@@ -29,4 +29,9 @@ public class UserInfo {
 		this.email = email;
 	}
 
+	@Override
+	public String toString() {
+		return "UserInfo [url=" + url + ", name=" + name + ", email=" + email + "]";
+	}
+
 }
