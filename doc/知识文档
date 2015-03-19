@@ -22,3 +22,5 @@
 	git push 推送到远端
 	
 9 ListView setDivider设置分割线  setSelector设置背景图片样式  setCacheColorHint 快速拖动绘制背景
+10 RecyclerListener 监听视图被移动到后台堆栈中的监听器
+11  volatile 用于线程同步
