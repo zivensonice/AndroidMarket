@@ -3,16 +3,21 @@ package com.ziven.androidmarket.ui.fragment;
 import java.util.List;
 
 import android.view.View;
+import android.widget.AbsListView;
 
+import com.ziven.androidmarket.protocol.SubjectProtocol;
+import com.ziven.androidmarket.ui.adapter.DefaultAdapter;
+import com.ziven.androidmarket.ui.holder.BaseHolder;
 import com.ziven.androidmarket.ui.view.LoadingPage.LoadResult;
 import com.ziven.androidmarket.ui.widget.BaseListView;
+import com.ziven.androidmarket.utils.UIUtils;
 import com.ziven.bean.SubjectInfo;
 
 public class SubjectFragment extends BaseFragment {
 	private BaseListView mListView;
-	private List<SubjectInfo> mDatas;
+	private List<SubjectInfo> subjectInfos;
 	private SubjectAdaptaer mAdapter;
-	
+
 	@Override
 	protected View createSucceedView() {
 		return null;
@@ -23,5 +28,28 @@ public class SubjectFragment extends BaseFragment {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	class SubjectAdaptaer extends 
+
+	class SubjectAdapter extends DefaultAdapter<SubjectInfo> {
+		public SubjectAdapter(AbsListView listView, List<SubjectInfo> datas) {
+			super(listView, subjectInfos);
+		}
+
+		@Override
+		public List<SubjectInfo> onLoadMore() {
+			SubjectProtocol protocol = new SubjectProtocol();
+			return protocol.load(getT().size());
+		}
+
+		@Override
+		public void onItemClickInner(int position) {
+			UIUtils.showToastSafe(getItem(position).getDes());
+		}
+
+		@Override
+		protected BaseHolder getHolder() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+	}
 }
