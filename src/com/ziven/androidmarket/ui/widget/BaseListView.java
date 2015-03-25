@@ -9,16 +9,16 @@ import android.widget.ListView;
 
 public class BaseListView extends ListView {
 
-	private BaseListView(Context context, AttributeSet attrs, int defStyle) {
+	public BaseListView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		init();
 	}
 
-	private BaseListView(Context context, AttributeSet attrs) {
+	public BaseListView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
 
-	private BaseListView(Context context) {
+	public BaseListView(Context context) {
 		super(context);
 	}
 

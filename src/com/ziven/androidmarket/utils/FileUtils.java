@@ -43,7 +43,7 @@ public class FileUtils {
 		sb.append(name);
 		sb.append(File.separator);
 		String path = sb.toString();
-		if (createDir(path)) {
+		if (createDirs(path)) {
 			return path;
 		} else {
 			return null;
@@ -56,7 +56,7 @@ public class FileUtils {
 	 * @param dirPath
 	 * @return
 	 */
-	public static boolean createDir(String dirPath) {
+	public static boolean createDirs(String dirPath) {
 		File file = new File(dirPath);
 		if (!file.exists() || !file.isDirectory()) {
 			return file.mkdirs();
@@ -98,8 +98,7 @@ public class FileUtils {
 	 * @return
 	 */
 	public static boolean isSDCardAvailable() {
-		if (Environment.MEDIA_MOUNTED.equals(Environment
-				.getExternalStorageState())) {
+		if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
 			return true;
 		} else {
 			return false;
@@ -117,8 +116,7 @@ public class FileUtils {
 	 *            如果文件存在,是否需要删除重建
 	 * @return 是否写入成功
 	 */
-	public static boolean writeFile(InputStream is, String path,
-			boolean recreate) {
+	public static boolean writeFile(InputStream is, String path, boolean recreate) {
 		boolean res = false;
 		File f = new File(path);
 		FileOutputStream fos = null;

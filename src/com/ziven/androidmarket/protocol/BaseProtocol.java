@@ -46,7 +46,8 @@ public abstract class BaseProtocol<T> implements Constant {
 		BufferedReader reader = null;
 		try {
 			// 因为创建文件的时候不能包含特殊字符,所以使用_代替?index=
-			reader = new BufferedReader(new FileReader(path + getKey() + "_" + index + getParams()));
+			FileReader fd = new FileReader(path + getKey() + "_" + index + getParams());
+			reader = new BufferedReader(fd);
 			long time = Long.valueOf(reader.readLine());
 			// 判断时间未过期
 			if (time > SystemClock.currentThreadTimeMillis()) {

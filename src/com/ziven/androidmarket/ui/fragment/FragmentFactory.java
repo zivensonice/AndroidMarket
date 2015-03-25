@@ -27,7 +27,8 @@ public class FragmentFactory {
 		if (null == fragment) {
 			switch (position) {
 			case TAB_HOME:
-				fragment = new HomeFragment();
+				// fragment = new HomeFragment();
+				fragment = new SubjectFragment();
 				break;
 			case TAB_APP:
 				fragment = new AppFragment();

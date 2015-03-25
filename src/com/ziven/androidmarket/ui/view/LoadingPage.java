@@ -82,7 +82,6 @@ public abstract class LoadingPage extends FrameLayout {
 					mState = loadResult.getValue();
 					showPage();
 				}
-
 			});
 		}
 	}
@@ -127,7 +126,7 @@ public abstract class LoadingPage extends FrameLayout {
 
 	/* 页面状态 */
 	public enum LoadResult {
-		ERROR(2), EMPTY(3), SUCCEED(4);
+		ERROR(3), EMPTY(4), SUCCEED(5);
 		int value;
 
 		LoadResult(int value) {

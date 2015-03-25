@@ -4,18 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <com.ziven.androidmarket.ui.widget.PagerTab
-        android:id="@+id/tabs"
+    <RelativeLayout
+        android:id="@+id/content_frame"
         android:layout_width="match_parent"
-        android:layout_height="42dip"
-        android:background="@drawable/bg_tab" />
+        android:layout_height="match_parent" >
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/tabs"
-        tools:context=".MainActivity" />
+        <com.ziven.androidmarket.ui.widget.PagerTab
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="42dip"
+            android:background="@drawable/bg_tab" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tabs"
+            tools:context=".com.ziven.androidmarket.ui.activity.MainActivity" />
+    </RelativeLayout>
 
     <FrameLayout
         android:id="@+id/start_drawer"
