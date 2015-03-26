@@ -1,12 +1,13 @@
 package com.ziven.androidmarket.ui.holder;
 
+import com.ziven.androidmarket.utils.UIUtils;
+
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ziven.androidmarket.R;
 import com.ziven.androidmarket.http.image.ImageLoader;
-import com.ziven.androidmarket.utils.UIUtils;
 import com.ziven.bean.SubjectInfo;
 
 public class SubjectHolder extends BaseHolder<SubjectInfo> {
