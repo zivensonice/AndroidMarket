@@ -97,6 +97,22 @@ public abstract class DefaultAdapter<T> extends BaseAdapter implements RecyclerL
 		return holder.getRootView();
 	}
 
+	/**
+	 * 根据position的位置返回那种item展示布局
+	 */
+	@Override
+	public int getItemViewType(int position) {
+		if (position == getCount() - 1) {
+			return MORE_VIEW_TYPE;
+		} else {
+			return getItemViewTypeInner(position);
+		}
+	}
+
+	public int getItemViewTypeInner(int position) {
+		return ITEM_VIEW_TYPE;// 普通Item布局
+	}
+
 	public BaseHolder getMoreHolder() {
 		if (mMoreHolder == null) {
 			mMoreHolder = new MoreHolder(this, hasMore());

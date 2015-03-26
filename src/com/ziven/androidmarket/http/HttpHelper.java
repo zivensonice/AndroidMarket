@@ -115,7 +115,8 @@ public class HttpHelper {
 
 		/* 当返回字节码小于300,返回字节流 */
 		public InputStream getInputStream() {
-			if (null != mInputStream && getCode() < 300) {
+			L.d("getCode" + getCode());
+			if (null == mInputStream && getCode() < 300) {
 				HttpEntity entity = mResponse.getEntity();
 				try {
 					mInputStream = entity.getContent();

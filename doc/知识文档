@@ -24,3 +24,7 @@
 9 ListView setDivider设置分割线  setSelector设置背景图片样式  setCacheColorHint 快速拖动绘制背景
 10 RecyclerListener 监听视图被移动到后台堆栈中的监听器
 11  volatile 用于线程同步
+12  Eclipse  移除所有断点  菜单栏,Run,Remove All BreakPoint;  Ctrl+Q 快速回到上次编辑的地方
+13	Git 查看某一个文件修改情况  cd进入修改目录.
+	git log --pretty==oneline 文件名  得到修改版本号
+	git show 版本号  文件名

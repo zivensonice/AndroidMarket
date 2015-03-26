@@ -157,18 +157,21 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener {
 
 	@Override
 	public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+		// 滑动时候加载
 	}
 
+	/**
+	 * ViewPager 一般加载三个,左边一个 右边一个 自己一个.
+	 */
 	@Override
 	public void onPageSelected(int position) {
-
+		BaseFragment fragment = FragmentFactory.createFragment(position);
+		fragment.show();
 	}
 
 	@Override
 	public void onPageScrollStateChanged(int state) {
-		BaseFragment fragment = FragmentFactory.createFragment(state);
-		fragment.show();
+		// 状态改变时候加载
 	}
 
 }

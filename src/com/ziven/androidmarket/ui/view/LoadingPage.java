@@ -1,6 +1,7 @@
 package com.ziven.androidmarket.ui.view;
 
 import com.ziven.androidmarket.R;
+import com.ziven.androidmarket.utils.L;
 import com.ziven.androidmarket.utils.UIUtils;
 import com.ziven.manager.ThreadManager;
 
@@ -16,11 +17,11 @@ public abstract class LoadingPage extends FrameLayout {
 	/* 加载中状态 */
 	private static final int STATE_LOADING = 1;
 	/* 加载完毕,但是出错状态 */
-	private static final int STATE_ERROR = 2;
+	private static final int STATE_ERROR = 3;
 	/* 加载完毕,但是数据为空状态 */
-	private static final int STATE_EMPTY = 3;
+	private static final int STATE_EMPTY = 4;
 	/* 加载成功 */
-	private static final int STATE_SUCCEED = 4;
+	private static final int STATE_SUCCEED = 5;
 	/* 加载中显示View */
 	private View mLoadingView;
 	/* 加载出错显示View */
@@ -67,7 +68,14 @@ public abstract class LoadingPage extends FrameLayout {
 	}
 
 	protected View createErrorView() {
-		return UIUtils.inflate(R.layout.loading_page_error);
+		View view = UIUtils.inflate(R.layout.loading_page_error);
+		view.findViewById(R.id.page_bt).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				show();
+			}
+		});
+		return view;
 	}
 
 	class LoadingTask implements Runnable {
@@ -96,7 +104,7 @@ public abstract class LoadingPage extends FrameLayout {
 			mErrorView.setVisibility(mState == STATE_ERROR ? View.VISIBLE : View.INVISIBLE);
 		}
 		if (null != mEmptyView) {
-			mErrorView.setVisibility(mState == STATE_EMPTY ? View.VISIBLE : View.INVISIBLE);
+			mEmptyView.setVisibility(mState == STATE_EMPTY ? View.VISIBLE : View.INVISIBLE);
 		}
 		// 只有数据成功返回了,才知道成功的View该如何显示,因为该View的显示依赖加载完毕的数据
 		if (mState == STATE_SUCCEED && mSucceedView == null) {

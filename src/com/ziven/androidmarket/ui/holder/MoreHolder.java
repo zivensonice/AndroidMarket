@@ -2,6 +2,7 @@ package com.ziven.androidmarket.ui.holder;
 
 import com.ziven.androidmarket.R;
 import com.ziven.androidmarket.ui.adapter.DefaultAdapter;
+import com.ziven.androidmarket.utils.L;
 import com.ziven.androidmarket.utils.UIUtils;
 
 import android.R.integer;
@@ -47,12 +48,13 @@ public class MoreHolder extends BaseHolder<Integer> implements OnClickListener {
 	@Override
 	public View getRootView() {
 		if (getT() == HAS_MORE) {
+			L.d("getT() == HAS_MORE:" + (getT() == HAS_MORE));
 			loadMore();
 		}
 		return super.getRootView();
 	}
 
-	private void loadMore() {
+	public void loadMore() {
 		mAdapter.loadMore();
 	}
 

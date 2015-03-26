@@ -21,6 +21,7 @@ public abstract class BaseProtocol<T> implements Constant {
 
 	/* 加载数据 */
 	public T load(int index) {
+		L.d("load...");
 		// 数据加载过快
 		SystemClock.sleep(1000);
 		String json = null;

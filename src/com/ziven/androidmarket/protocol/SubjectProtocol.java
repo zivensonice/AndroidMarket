@@ -22,11 +22,11 @@ public class SubjectProtocol extends BaseProtocol<List<SubjectInfo>> {
 		L.d("jsonStr" + jsonStr);
 		Gson gson = new Gson();
 		try {
-			List<SubjectInfo> list = gson.fromJson(jsonStr, new TypeToken<List<Subject>>() {
+			List<SubjectInfo> list = gson.fromJson(jsonStr, new TypeToken<List<SubjectInfo>>() {
 			}.getType());
-			for (SubjectInfo info : list) {
-				L.d(info.toString());
-			}
+//			for (SubjectInfo info : list) {
+//				L.d(info.toString());
+//			}
 			return list;
 		} catch (JsonSyntaxException e) {
 			e.printStackTrace();

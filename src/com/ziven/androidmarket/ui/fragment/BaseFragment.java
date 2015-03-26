@@ -2,6 +2,7 @@ package com.ziven.androidmarket.ui.fragment;
 
 import java.util.List;
 
+import com.ziven.androidmarket.utils.L;
 import com.ziven.androidmarket.utils.UIUtils;
 import com.ziven.androidmarket.utils.ViewUtils;
 import com.ziven.androidmarket.ui.view.LoadingPage;
@@ -24,6 +25,7 @@ public abstract class BaseFragment extends Fragment {
 			mContentPager = new LoadingPage(UIUtils.getContext()) {
 				@Override
 				public LoadResult load() {
+					L.d("load2....");
 					return BaseFragment.this.load();
 				}
 
