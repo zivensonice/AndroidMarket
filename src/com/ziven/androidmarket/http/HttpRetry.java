@@ -42,7 +42,7 @@ public class HttpRetry implements HttpRequestRetryHandler {
 	// 最大重试次数
 	private final int maxRetries;
 
-	private HttpRetry(int maxRetries) {
+	public HttpRetry(int maxRetries) {
 		this.maxRetries = maxRetries;
 	}
 

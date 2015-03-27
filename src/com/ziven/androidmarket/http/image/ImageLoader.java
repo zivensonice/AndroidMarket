@@ -144,7 +144,9 @@ public class ImageLoader {
 			L.e(e);
 		} finally {
 			try {
-				fis.close();
+				if (fis != null) {
+					fis.close();
+				}
 			} catch (IOException e) {
 				L.e(e);
 			}

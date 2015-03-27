@@ -5,36 +5,35 @@ import com.ziven.androidmarket.http.image.ImageLoader;
 import android.view.View;
 import android.widget.ImageView;
 
-public abstract class BaseHolder<T> {
+public abstract class BaseHolder<Data> {
 	protected View mRootView;
 	protected int mPosition;
-	protected T t;
+	protected Data mData;
 
 	public BaseHolder() {
 		mRootView = initView();
-		// 设置数据绑定
 		mRootView.setTag(this);
-	}
-
-	public int getPosition() {
-		return mPosition;
-	}
-
-	public void setPosition(int mPosition) {
-		this.mPosition = mPosition;
-	}
-
-	public T getT() {
-		return t;
-	}
-
-	public void setT(T t) {
-		this.t = t;
-		refreshView();
 	}
 
 	public View getRootView() {
 		return mRootView;
+	}
+
+	public void setData(Data data) {
+		mData = data;
+		refreshView();
+	}
+
+	public Data getData() {
+		return mData;
+	}
+
+	public void setPosition(int position) {
+		mPosition = position;
+	}
+
+	public int getPosition() {
+		return mPosition;
 	}
 
 	public void recycleImageView(ImageView view) {
@@ -42,16 +41,17 @@ public abstract class BaseHolder<T> {
 		if (tag != null && tag instanceof String) {
 			String key = (String) tag;
 			ImageLoader.cancel(key);
+			// view.setImageDrawable(null);
 		}
 	}
 
-	/* 子类必须覆盖用于实现UI初始化 */
+	/** 子类必须覆盖用于实现UI初始化 */
 	protected abstract View initView();
 
-	/* 子类必须覆盖实现UI刷新 */
+	/** 子类必须覆盖用于实现UI刷新 */
 	public abstract void refreshView();
 
-	/* 用于回收 */
+	/** 用于回收 */
 	public void recycle() {
 
 	}

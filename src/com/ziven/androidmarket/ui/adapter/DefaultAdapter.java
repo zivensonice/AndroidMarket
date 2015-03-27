@@ -19,51 +19,47 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 
-public abstract class DefaultAdapter<T> extends BaseAdapter implements RecyclerListener, OnItemClickListener {
-
+public abstract class DefaultAdapter<Data> extends BaseAdapter implements RecyclerListener, OnItemClickListener {
 	public static final int MORE_VIEW_TYPE = 0;
 	public static final int ITEM_VIEW_TYPE = 1;
-	// 和该adapter关联的listview
-	protected AbsListView mListView;
-	// 用于记录所有显示的Holder
-	private List<BaseHolder> mDispalyHolders;
-	private List<T> mT;// adapter数据集
-	// 用于线程同步,展示是否被加载
+
+	protected AbsListView mListView;// 和该adapter关联的listView
+	private List<BaseHolder> mDisplayedHolders;// 用于记录所有显示的holder
+	private List<Data> mDatas;// adapter的数据集
 	private volatile boolean mIsLoading;
 	private MoreHolder mMoreHolder;
 
-	public DefaultAdapter(AbsListView listView, List<T> t) {
-		mDispalyHolders = new ArrayList<BaseHolder>();
+	protected abstract BaseHolder getHolder();
+
+	public DefaultAdapter(AbsListView listView, List<Data> datas) {
+		mDisplayedHolders = new ArrayList<BaseHolder>();
+		mListView = listView;
 		if (null != listView) {
-			mListView = listView;
+			// 设置
 			listView.setRecyclerListener(this);
 			listView.setOnItemClickListener(this);
 		}
-		setT(t);
-	}
-
-	public void setT(List<T> t) {
-		mT = t;
-	}
-
-	public List<T> getT() {
-		return mT;
+		setData(datas);
 	}
 
 	@Override
-	public int getCount() {
-		if (mT != null) {
-			return mT.size() + 1;// 为了最后加载更多的布局
+	public void onMovedToScrapHeap(View view) {
+		if (null != view) {
+			Object tag = view.getTag();
+			if (tag instanceof BaseHolder) {
+				BaseHolder holder = (BaseHolder) tag;
+				synchronized (mDisplayedHolders) {
+					mDisplayedHolders.remove(holder);
+				}
+				holder.recycle();
+			}
 		}
-		return 0;
 	}
 
-	@Override
-	public T getItem(int position) {
-		if (mT != null && position < mT.size()) {
-			return mT.get(position);
+	public List<BaseHolder> getDisplayedHolders() {
+		synchronized (mDisplayedHolders) {
+			return new ArrayList<BaseHolder>(mDisplayedHolders);
 		}
-		return null;
 	}
 
 	@Override
@@ -71,83 +67,28 @@ public abstract class DefaultAdapter<T> extends BaseAdapter implements RecyclerL
 		return position;
 	}
 
-	/**
-	 * 获取item有几种类型,默认是1中,+1表示加载更多的类型
-	 */
-	@Override
-	public int getViewTypeCount() {
-		return super.getViewTypeCount() + 1;// 加载更多的布局
+	public void setData(List<Data> datas) {
+		mDatas = datas;
+	}
+
+	public List<Data> getData() {
+		return mDatas;
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		BaseHolder<T> holder;
-		if (convertView != null && convertView.getTag() instanceof BaseHolder) {
-			holder = (BaseHolder<T>) convertView.getTag();
-		} else {
-		// 第一次加载否
-		if (convertView != null
-				&& convertView.getTag() instanceof BaseHolder<?>) {
-			holder = (BaseHolder<T>) convertView.getTag();
-		} else {
-			// 加载的类型
-			if (getItemViewType(position) == MORE_VIEW_TYPE) {
-				holder = getMoreHolder();
-			} else {
-				holder = getHolder();
-			}
+	public int getCount() {
+		if (mDatas != null) {
+			return mDatas.size() + 1;// 加1是为了最后加载更多的布局
 		}
-		if (getItemViewType(position) == ITEM_VIEW_TYPE) {
-			holder.setT(mT.get(position));
-		}
-		// 如果是普通类型的item就把它设置到mT中
-		if (getItemViewType(position) == ITEM_VIEW_TYPE) {
-			holder.setT(mT.get(position));
-		}
-		// 加入当前视窗,维护当前视窗的视图队列
-		mDispalyHolders.add(holder);
-		return holder.getRootView();
+		return 0;
 	}
 
-
-	/** 根据position的位置返回那种item展示类型 */
 	@Override
-	public int getItemViewType(int position) {
-		if (position == getCount() - 1) {
-			return MORE_VIEW_TYPE;
-		} else {
-			return getItemViewTypeInner(position);
+	public Data getItem(int position) {
+		if (mDatas != null && position < mDatas.size()) {
+			return mDatas.get(position);
 		}
-	}
-
-	public int getItemViewTypeInner(int position) {
-		return ITEM_VIEW_TYPE;// 普通Item布局
-	}
-
-	public BaseHolder getMoreHolder() {
-		if (mMoreHolder == null) {
-			mMoreHolder = new MoreHolder(this, hasMore());
-		}
-		return mMoreHolder;
-			return getItemViewTypeInnter(position);
-		}
-	}
-
-	private int getItemViewTypeInnter(int position) {
-		return ITEM_VIEW_TYPE;
-	}
-
-	/** 获取item有几种类型,默认是一种,加一是为了加载更多 */
-	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		position = position - getHeadItemCount();
-		onItemtInner(position);
-	}
-
-	public int getHeadItemCount() {
-	public int getViewTypeCount() {
-		// 加1是为了,最后加载更多的布局
-		return super.getViewTypeCount() + 1;
+		return null;
 	}
 
 	public int getHeaderViewCount() {
@@ -159,83 +100,45 @@ public abstract class DefaultAdapter<T> extends BaseAdapter implements RecyclerL
 		return count;
 	}
 
+	// 获取item有几种类型，默认是一种类型，这里在加一是为了做加载更多。
 	@Override
-	public void onMovedToScrapHeap(View view) {
-		if (null != view) {
-			Object tag = view.getTag();
-			if (tag instanceof BaseHolder<?>) {
-				BaseHolder<?> holder = (BaseHolder<?>) tag;
-				synchronized (mDispalyHolders) {
-					mDispalyHolders.remove(holder);
-				}
-				holder.recycle();
+	public int getViewTypeCount() {
+		return super.getViewTypeCount() + 1;// 加1是为了最后加载更多的布局
+	}
+
+	// 根据position位置返回哪种item展示类型
+	@Override
+	public int getItemViewType(int position) {
+		if (position == getCount() - 1) {
+			return MORE_VIEW_TYPE;// 加载更多的布局
+		} else {
+			return getItemViewTypeInner(position);
+		}
+	}
+
+	public int getItemViewTypeInner(int position) {
+		return ITEM_VIEW_TYPE;// 普通item的布局
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		BaseHolder<Data> holder;
+		if (convertView != null && convertView.getTag() instanceof BaseHolder) {
+			holder = (BaseHolder<Data>) convertView.getTag();
+		} else {
+			if (getItemViewType(position) == MORE_VIEW_TYPE) {
+				holder = getMoreHolder();
+			} else {
+				holder = getHolder();
 			}
 		}
-	}
-
-	public List<BaseHolder> getDisplayedHolders() {
-		synchronized (mDispalyHolders) {
-			return new ArrayList<BaseHolder>(mDispalyHolders);
+		if (getItemViewType(position) == ITEM_VIEW_TYPE) {
+			holder.setData(mDatas.get(position));
 		}
+		mDisplayedHolders.add(holder);
+		return holder.getRootView();
 	}
 
-	public void loadMore() {
-		if (!mIsLoading) {
-			mIsLoading = true;
-			ThreadManager.getLongPool().execute(new Runnable() {
-
-				@Override
-				public void run() {
-					final List<T> t = onLoadMore();
-					UIUtils.post(new Runnable() {
-
-						@Override
-						public void run() {
-							if (t == null) {
-								getMoreHolder().setT(MoreHolder.ERROR);
-							} else if (mT.size() < 20) {
-								getMoreHolder().setT(MoreHolder.NO_MORE);
-							} else {
-								getMoreHolder().setT(MoreHolder.HAS_MORE);
-							}
-							if (t != null) {
-								if (getT() != null) {
-									getT().addAll(t);
-								} else {
-									setT(t);
-								}
-							}
-							notifyDataSetChanged();
-							mIsLoading = false;
-						}
-					});
-				@Override
-				public void run() {
-					if (mT == null) {
-						getMoreHolder().setT(MoreHolder.ERROR);
-					} else if (mT.size() < 20) {
-						getMoreHolder().setT(MoreHolder.NO_MORE);
-					} else {
-						getMoreHolder().setT(MoreHolder.HAS_MORE);
-					}
-					if (mT != null) {
-						if (getT() != null) {
-							// 如果adapter数据集不为空,就添加到后面
-							getT().addAll(mT);
-						} else {
-							// 如果adapter数据集为空,就设置数据到他的数据集
-							setT(mT);
-						}
-					}
-					// 数据改变通知界面更新
-					notifyDataSetChanged();
-					mIsLoading = false;
-				}
-			});
-		}
-	}
-
-	/* 需要重写的方法 */
 	public BaseHolder getMoreHolder() {
 		if (mMoreHolder == null) {
 			mMoreHolder = new MoreHolder(this, hasMore());
@@ -243,22 +146,55 @@ public abstract class DefaultAdapter<T> extends BaseAdapter implements RecyclerL
 		return mMoreHolder;
 	}
 
+	public void loadMore() {
+		// 防止重复加载
+		if (!mIsLoading) {
+			mIsLoading = true;
+			ThreadManager.getLongPool().execute(new Runnable() {
+				@Override
+				public void run() {
+					final List<Data> datas = onLoadMore();
+					UIUtils.post(new Runnable() {
+						@Override
+						public void run() {
+							if (datas == null) {
+								getMoreHolder().setData(MoreHolder.ERROR);
+							} else if (datas.size() < 20) {
+								getMoreHolder().setData(MoreHolder.NO_MORE);
+							} else {
+								getMoreHolder().setData(MoreHolder.HAS_MORE);
+							}
+							if (datas != null) {
+								if (getData() != null) {
+									getData().addAll(datas);
+								} else {
+									setData(datas);
+								}
+							}
+							notifyDataSetChanged();
+							mIsLoading = false;
+						}
+					});
+				}
+			});
+		}
+	}
+
+	public List<Data> onLoadMore() {
+		return null;
+	}
+
 	public boolean hasMore() {
 		return true;
 	}
 
-	public List<T> onLoadMore() {
-		return null;
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		position = position - getHeaderViewCount();// 此时的position是加上了header的
+		onItemClickInner(position);
 	}
 
-	public void onItemtInner(int position) {
+	public void onItemClickInner(int position) {
+
 	}
-
-	public abstract BaseHolder getHolder();
-	public abstract List<T> onLoadMore();
-
-	public abstract void onItemClickInner(int position);
-
-	protected abstract BaseHolder getHolder();
-
 }

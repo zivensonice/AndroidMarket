@@ -11,22 +11,16 @@ import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
 
 public class MoreHolder extends BaseHolder<Integer> implements OnClickListener {
-
 	public static final int HAS_MORE = 0;
 	public static final int NO_MORE = 1;
 	public static final int ERROR = 2;
 
 	private RelativeLayout mLoading, mError;
-	private DefaultAdapter<?> mAdapter;
+	private DefaultAdapter mAdapter;
 
-	public MoreHolder(DefaultAdapter<?> adapter, boolean hasMore) {
-		setT(hasMore ? HAS_MORE : NO_MORE);
+	public MoreHolder(DefaultAdapter adapter, boolean hasMore) {
+		setData(hasMore ? HAS_MORE : NO_MORE);
 		mAdapter = adapter;
-	}
-
-	@Override
-	public void onClick(View v) {
-		loadMore();
 	}
 
 	@Override
@@ -40,22 +34,30 @@ public class MoreHolder extends BaseHolder<Integer> implements OnClickListener {
 
 	@Override
 	public void refreshView() {
-		Integer data = getT();
+		Integer data = getData();
 		mLoading.setVisibility(data == HAS_MORE ? View.VISIBLE : View.GONE);
 		mError.setVisibility(data == ERROR ? View.VISIBLE : View.GONE);
 	}
 
 	@Override
 	public View getRootView() {
-		if (getT() == HAS_MORE) {
-			L.d("getT() == HAS_MORE:" + (getT() == HAS_MORE));
+		if (getData() == HAS_MORE) {
 			loadMore();
 		}
 		return super.getRootView();
 	}
 
+	public MoreHolder setAdapter(DefaultAdapter adapter) {
+		mAdapter = adapter;
+		return this;
+	}
+
+	@Override
+	public void onClick(View v) {
+		loadMore();
+	}
+
 	public void loadMore() {
 		mAdapter.loadMore();
 	}
-
 }

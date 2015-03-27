@@ -17,7 +17,7 @@ import com.ziven.bean.SubjectInfo;
 
 public class SubjectFragment extends BaseFragment {
 	private BaseListView mListView;
-	private List<SubjectInfo> subjectInfos;
+	private List<SubjectInfo> mDatas;
 	private SubjectAdaptaer mAdapter;
 
 	@Override
@@ -39,6 +39,12 @@ public class SubjectFragment extends BaseFragment {
 
 	class SubjectAdaptaer extends DefaultAdapter<SubjectInfo> {
 
+		@Override
+		public void onItemClickInner(int position) {
+			L.d("Click:" + position);
+			UIUtils.showToastSafe(getItem(position).getDes());
+		}
+
 		public SubjectAdaptaer(AbsListView listView, List<SubjectInfo> t) {
 			super(listView, t);
 		}
@@ -51,7 +57,7 @@ public class SubjectFragment extends BaseFragment {
 		@Override
 		public List<SubjectInfo> onLoadMore() {
 			SubjectProtocol protocol = new SubjectProtocol();
-			return protocol.load(getT().size());
+			return protocol.load(getData().size());
 		}
 
 		@Override
@@ -59,34 +65,6 @@ public class SubjectFragment extends BaseFragment {
 			return new SubjectHolder();
 		}
 
-		@Override
-		public void onItemtInner(int position) {
-			UIUtils.showToastSafe(getItem(position).getDes());
-		}
-
 	}
 
-	class SubjectAdapter extends DefaultAdapter<SubjectInfo> {
-		public SubjectAdapter(AbsListView listView, List<SubjectInfo> datas) {
-			super(listView, subjectInfos);
-		}
-
-		@Override
-		public List<SubjectInfo> onLoadMore() {
-			SubjectProtocol protocol = new SubjectProtocol();
-			return protocol.load(getT().size());
-		}
-
-		@Override
-		public void onItemClickInner(int position) {
-			UIUtils.showToastSafe(getItem(position).getDes());
-		}
-
-		@Override
-		protected BaseHolder getHolder() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-	}
 }

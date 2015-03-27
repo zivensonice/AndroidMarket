@@ -42,7 +42,7 @@ public class HttpHelper {
 
 	/* 下载 */
 	public static HttpResult download(String url) {
-		HttpGet get = new HttpGet();
+		HttpGet get = new HttpGet(url);
 		return execute(url, get);
 	}
 
@@ -55,8 +55,18 @@ public class HttpHelper {
 		boolean retry = true;
 		while (retry) {
 			try {
+				if (null == request) {
+					L.d("request = null");
+				}
+				if (null == httpContext) {
+					L.d("httpContext = null");
+				}
+				if (null == httpClient) {
+					L.d("httpClient = null");
+				}
 				HttpResponse response = httpClient.execute(request, httpContext);
 				if (response != null) {
+					L.d("response = null");
 					return new HttpResult(httpClient, request, response);
 				}
 			} catch (Exception e) {

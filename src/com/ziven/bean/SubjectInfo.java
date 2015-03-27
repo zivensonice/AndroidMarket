@@ -1,7 +1,7 @@
 package com.ziven.bean;
 
 public class SubjectInfo {
-	/*子项信息*/
+	/* 子项信息 */
 	private String des;
 	/* 子项目图片链接 */
 	private String url;
@@ -20,6 +20,11 @@ public class SubjectInfo {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import com.ziven.androidmarket.R;
 import com.ziven.androidmarket.http.image.ImageLoader;
 import com.ziven.androidmarket.protocol.UserProtocol;
+import com.ziven.androidmarket.utils.L;
 import com.ziven.androidmarket.utils.UIUtils;
 import com.ziven.bean.UserInfo;
 import com.ziven.manager.ThreadManager;

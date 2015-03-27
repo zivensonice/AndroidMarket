@@ -11,6 +11,7 @@ import android.os.Process;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 /**
  * @类名:UIUtils
@@ -124,7 +125,7 @@ public class UIUtils {
 
 	public static void showToastSafe(final String str) {
 		if (isRunInMainThread()) {
+			Toast.makeText(getContext(), str, Toast.LENGTH_SHORT).show();
 		}
 	}
-
 }

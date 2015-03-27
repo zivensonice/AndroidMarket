@@ -1,5 +1,6 @@
 package com.ziven.androidmarket.ui.holder;
 
+import com.ziven.androidmarket.utils.L;
 import com.ziven.androidmarket.utils.UIUtils;
 
 import android.view.View;
@@ -24,11 +25,12 @@ public class SubjectHolder extends BaseHolder<SubjectInfo> {
 
 	@Override
 	public void refreshView() {
-		SubjectInfo data = getT();
+		SubjectInfo data = getData();
 		String des = data.getDes();
 		String url = data.getUrl();
 		tv.setText(des);
 		iv.setTag(url);
+		L.d("refreshView url:" + url);
 		ImageLoader.load(iv, url);
 	}
 
