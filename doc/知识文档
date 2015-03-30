@@ -28,3 +28,5 @@
 13	Git 查看某一个文件修改情况  cd进入修改目录.
 	git log --pretty==oneline 文件名  得到修改版本号
 	git show 版本号  文件名
+14  Gson通过TypeToken拿到反射类型  TypeToken<List<E>>(){}.getType();
+
