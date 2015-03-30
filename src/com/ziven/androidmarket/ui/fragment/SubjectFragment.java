@@ -30,7 +30,6 @@ public class SubjectFragment extends BaseFragment {
 
 	@Override
 	protected LoadResult load() {
-		L.d("load3....");
 		SubjectProtocol protocol = new SubjectProtocol();
 		mDatas = protocol.load(0);
 		L.d("check:" + check(mDatas).getValue());

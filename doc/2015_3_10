@@ -7,4 +7,5 @@
 	ScrollView fillViewport属性解决视图无法撑满全屏问题,存在留白,同时ScrollView中只能填充一个属性为MatchParents的LinearLayout
 	
 2.为什么要选择在主线程刷新UI,如何
+3.ConcurrentHashMap 线程安全,且支持高并发量的HashMap,实现:读操作不加锁,写入操作加锁
 
