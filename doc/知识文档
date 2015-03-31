@@ -29,4 +29,5 @@
 	git log --pretty==oneline 文件名  得到修改版本号
 	git show 版本号  文件名
 14  Gson通过TypeToken拿到反射类型  TypeToken<List<E>>(){}.getType();
-
+15  闷声发大财,不谈论不评价任何人,不谈论事去映射任何人,谈论生活,谈论兴趣,谈论工作
+16 ProgressArc TODO: 自定义控件

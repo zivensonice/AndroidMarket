@@ -91,8 +91,7 @@ public class DownloadManager {
 			mDownLoadMap.put(appInfo.getId(), info);
 		}
 		// 判断状态是否为NONE/PAUSED/ERROR.只有这三种状态才能进行下载其他状态不予处理
-		if (info.getDownloadState() == STATE_NONE
-				|| info.getDownloadState() == STATE_PAUSED
+		if (info.getDownloadState() == STATE_NONE || info.getDownloadState() == STATE_PAUSED
 				|| info.getDownloadState() == STATE_ERROR) {
 			// 下载前,把状态设置为STATE_WAITING,因为此时并没有产生开始下载,只有把任务放入线程池,当任务真正开始执行时,才会改为STATE_DOWNLOADING
 			info.setDownloadState(STATE_WAITING);
@@ -147,8 +146,7 @@ public class DownloadManager {
 	public synchronized void open(AppInfo appInfo) {
 		try {
 			Context context = UIUtils.getContext();
-			Intent intent = context.getPackageManager()
-					.getLaunchIntentForPackage(appInfo.getPackageName());
+			Intent intent = context.getPackageManager().getLaunchIntentForPackage(appInfo.getPackageName());
 			context.startActivity(intent);
 		} catch (Exception e) {
 			L.e(e);
@@ -187,20 +185,17 @@ public class DownloadManager {
 			File file = new File(info.getPath());
 			HttpResult httpResult = null;
 			InputStream stream = null;
-			if (info.getCurrentSize() == 0 || !file.exists()
-					|| file.length() != info.getCurrentSize()) {
+			if (info.getCurrentSize() == 0 || !file.exists() || file.length() != info.getCurrentSize()) {
 				// 如果文件不存在,或者进度为0,或者进度和文件当前长度不相符,就需要重新下载
 				info.setCurrentSize(0);
 				file.delete();
-				httpResult = HttpHelper.download(Constant.IP + "download?name="
-						+ info.getUrl());
+				httpResult = HttpHelper.download(Constant.IP + "download?name=" + info.getUrl());
 			} else {
 				// 文件存在且长度和进度相等,采用断点下载
-				httpResult = HttpHelper.download(Constant.IP + "download?name="
-						+ info.getUrl() + "&range=" + info.getCurrentSize());
+				httpResult = HttpHelper.download(Constant.IP + "download?name=" + info.getUrl() + "&range="
+						+ info.getCurrentSize());
 			}
-			if (httpResult == null
-					|| (stream = httpResult.getInputStream()) == null) {
+			if (httpResult == null || (stream = httpResult.getInputStream()) == null) {
 				/* 没有下载内容,修改为错误状态 */
 				info.setDownloadState(STATE_ERROR);
 				notifyDownloadStateChanged(info);
@@ -208,7 +203,7 @@ public class DownloadManager {
 				FileOutputStream fos = null;
 				try {
 					fos = new FileOutputStream(file, true);
-					byte[] buffer = new byte[1024 * 4];
+					byte[] buffer = new byte[1024];
 					for (int count = -1; (count = stream.read(buffer)) != -1
 							&& info.getDownloadState() == STATE_DOWNLOADING;) {
 						// 每次读取到数据后,都需要判断是否为下载状态,如果不是,下载需要终止,如果是就刷新进度

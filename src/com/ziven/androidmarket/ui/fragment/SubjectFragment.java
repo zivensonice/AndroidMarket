@@ -32,7 +32,6 @@ public class SubjectFragment extends BaseFragment {
 	protected LoadResult load() {
 		SubjectProtocol protocol = new SubjectProtocol();
 		mDatas = protocol.load(0);
-		L.d("check:" + check(mDatas).getValue());
 		return check(mDatas);
 	}
 
@@ -40,7 +39,6 @@ public class SubjectFragment extends BaseFragment {
 
 		@Override
 		public void onItemClickInner(int position) {
-			L.d("Click:" + position);
 			UIUtils.showToastSafe(getItem(position).getDes());
 		}
 

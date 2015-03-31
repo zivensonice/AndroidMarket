@@ -18,15 +18,12 @@ public class UserProtocol extends BaseProtocol<List<UserInfo>> {
 
 	@Override
 	public List<UserInfo> parseFromJson(String jsonStr) {
-		L.d("parseFromJson:" + jsonStr);
 		try {
 			Gson gson = new Gson();
 			UserInfo info = gson.fromJson(jsonStr, new TypeToken<UserInfo>() {
 			}.getType());
 			List<UserInfo> list = new ArrayList<UserInfo>();
 			list.add(info);
-			String json = gson.toJson(list);
-			L.d("json:" + json);
 			// List<UserInfo> list = new ArrayList<UserInfo>();
 			// JSONObject jsonObject = new JSONObject(jsonStr);
 			// UserInfo info = new UserInfo();

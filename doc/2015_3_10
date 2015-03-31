@@ -8,4 +8,6 @@
 	
 2.为什么要选择在主线程刷新UI,如何
 3.ConcurrentHashMap 线程安全,且支持高并发量的HashMap,实现:读操作不加锁,写入操作加锁
+4.attrib +a +h +s +r e://123  在e盘下添加自动归档  隐藏 系统 只读文件.attrib -a -h -s -r e://123  取消以上属性.
+5.verticalCenter 垂直居中.相对Y轴而言   
 

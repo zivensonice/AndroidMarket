@@ -56,17 +56,13 @@ public class HttpHelper {
 		while (retry) {
 			try {
 				if (null == request) {
-					L.d("request = null");
 				}
 				if (null == httpContext) {
-					L.d("httpContext = null");
 				}
 				if (null == httpClient) {
-					L.d("httpClient = null");
 				}
 				HttpResponse response = httpClient.execute(request, httpContext);
 				if (response != null) {
-					L.d("response = null");
 					return new HttpResult(httpClient, request, response);
 				}
 			} catch (Exception e) {
@@ -125,7 +121,6 @@ public class HttpHelper {
 
 		/* 当返回字节码小于300,返回字节流 */
 		public InputStream getInputStream() {
-			L.d("getCode" + getCode());
 			if (null == mInputStream && getCode() < 300) {
 				HttpEntity entity = mResponse.getEntity();
 				try {

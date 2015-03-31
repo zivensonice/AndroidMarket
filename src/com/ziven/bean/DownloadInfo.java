@@ -20,8 +20,7 @@ public class DownloadInfo {
 		downloadInfo.currentSize = 0;
 		downloadInfo.downloadState = DownloadManager.STATE_NONE;
 		downloadInfo.url = appInfo.getDownloadUrl();
-		downloadInfo.path = FileUtils.getDownloadDir() + downloadInfo.appName
-				+ ".apk";
+		downloadInfo.path = FileUtils.getDownloadDir() + downloadInfo.appName + ".apk";
 		return downloadInfo;
 	}
 
@@ -81,11 +80,18 @@ public class DownloadInfo {
 		this.path = path;
 	}
 
+	@Override
+	public String toString() {
+		return "DownloadInfo [id=" + id + ", appName=" + appName + ", appSize=" + appSize + ", currentSize="
+				+ currentSize + ", downloadState=" + downloadState + ", url=" + url + ", path=" + path + "]";
+	}
+
 	public float getProgress() {
 		/* 除0判断 */
 		if (getAppSize() == 0) {
 			return 0;
 		}
-		return getCurrentSize() / getAppSize();
+		// +0.0f,是为了把弄类型转换成浮点型,这样运算的时候不会出现int型而导致进度丢失
+		return (getCurrentSize() + 0.0f) / getAppSize();
 	}
 }

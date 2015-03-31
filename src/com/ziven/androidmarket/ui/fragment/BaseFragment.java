@@ -25,7 +25,6 @@ public abstract class BaseFragment extends Fragment {
 			mContentPager = new LoadingPage(UIUtils.getContext()) {
 				@Override
 				public LoadResult load() {
-					L.d("load2....");
 					return BaseFragment.this.load();
 				}
 

@@ -17,14 +17,10 @@ public class SubjectProtocol extends BaseProtocol<List<SubjectInfo>> {
 
 	@Override
 	public List<SubjectInfo> parseFromJson(String jsonStr) {
-		L.d("jsonStr" + jsonStr);
 		Gson gson = new Gson();
 		try {
 			List<SubjectInfo> list = gson.fromJson(jsonStr, new TypeToken<List<SubjectInfo>>() {
 			}.getType());
-			for (SubjectInfo info : list) {
-				L.d(info.toString());
-			}
 			return list;
 		} catch (JsonSyntaxException e) {
 			L.e(e);

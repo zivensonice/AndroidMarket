@@ -139,7 +139,6 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener {
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			L.d(tab_names[position].toString());
 			return tab_names[position];
 		}
 

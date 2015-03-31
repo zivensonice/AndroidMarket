@@ -30,7 +30,6 @@ public class SubjectHolder extends BaseHolder<SubjectInfo> {
 		String url = data.getUrl();
 		tv.setText(des);
 		iv.setTag(url);
-		L.d("refreshView url:" + url);
 		ImageLoader.load(iv, url);
 	}
 
