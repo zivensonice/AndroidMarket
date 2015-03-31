@@ -12,6 +12,7 @@ import com.ziven.bean.AppInfo;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
+import android.widget.ListView;
 
 public class AppFragment extends BaseFragment {
 	private List<AppInfo> mDatas;
@@ -19,10 +20,28 @@ public class AppFragment extends BaseFragment {
 	private AppAdapter mAdapter;
 
 	@Override
+	public void onPause() {
+		super.onPause();
+		if (mAdapter != null) {
+			mAdapter.stopObserver();
+		}
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (mAdapter != null) {
+			mAdapter.startObserver();
+			mAdapter.notifyDataSetChanged();
+		}
+	}
+
+	@Override
 	protected View createSucceedView() {
 		mListView = new BaseListView(UIUtils.getContext());
 		mAdapter = new AppAdapter(mListView, mDatas);
-		
+		mAdapter.startObserver();
+		return mListView;
 	}
 
 	@Override
@@ -34,14 +53,14 @@ public class AppFragment extends BaseFragment {
 
 	class AppAdapter extends ListBaseAdapter {
 
-		private AppAdapter(AbsListView listView, List<AppInfo> datas) {
+		public AppAdapter(AbsListView listView, List<AppInfo> datas) {
 			super(listView, datas);
 		}
 
 		@Override
 		public List<AppInfo> onLoadMore() {
-			// TODO Auto-generated method stub
-			return super.onLoadMore();
+			AppProtocol protocol = new AppProtocol();
+			return protocol.load(getData().size());
 		}
 
 	}

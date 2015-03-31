@@ -19,7 +19,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 
-public abstract class DefaultAdapter<Data> extends BaseAdapter implements RecyclerListener, OnItemClickListener {
+public abstract class DefaultAdapter<Data> extends BaseAdapter implements
+		RecyclerListener, OnItemClickListener {
 	public static final int MORE_VIEW_TYPE = 0;
 	public static final int ITEM_VIEW_TYPE = 1;
 
@@ -36,6 +37,7 @@ public abstract class DefaultAdapter<Data> extends BaseAdapter implements Recycl
 		mListView = listView;
 		if (null != listView) {
 			// 设置
+			listView.setAdapter(this);
 			listView.setRecyclerListener(this);
 			listView.setOnItemClickListener(this);
 		}
@@ -189,7 +191,8 @@ public abstract class DefaultAdapter<Data> extends BaseAdapter implements Recycl
 	}
 
 	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
 		position = position - getHeaderViewCount();// 此时的position是加上了header的
 		onItemClickInner(position);
 	}
