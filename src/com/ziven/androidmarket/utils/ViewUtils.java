@@ -42,4 +42,14 @@ public class ViewUtils {
 	public static <T extends View> T findViewByID(View layout, int id) {
 		return (T) layout.findViewById(id);
 	}
+
+	/** 判断触点是否落在该View上 */
+	public static boolean isTouchInView(MotionEvent ev, View v) {
+		int[] vLoc = new int[2];
+		v.getLocationOnScreen(vLoc);
+		float motionX = ev.getRawX();
+		float motionY = ev.getRawY();
+		return motionX >= vLoc[0] && motionX <= (vLoc[0] + v.getWidth()) && motionY >= vLoc[1]
+				&& motionY <= (vLoc[1] + v.getHeight());
+	}
 }
