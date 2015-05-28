@@ -53,7 +53,7 @@ public class AppFragment extends BaseFragment {
 
 	class AppAdapter extends ListBaseAdapter {
 
-		public AppAdapter(AbsListView listView, List<AppInfo> datas) {
+		public AppAdapter(ListView listView, List<AppInfo> datas) {
 			super(listView, datas);
 		}
 

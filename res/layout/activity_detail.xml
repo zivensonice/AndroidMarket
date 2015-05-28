@@ -1,0 +1,64 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <FrameLayout
+        android:id="@+id/bottom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/detail_bottom_bg" >
+    </FrameLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottom_layout"
+        android:layout_marginBottom="5dp"
+        android:fillViewport="true" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <FrameLayout
+                android:id="@+id/detail_info_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/list_item_bg_normal" >
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/detail_safe_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/detail_info_layout"
+                android:background="@drawable/list_item_bg_normal" >
+            </FrameLayout>
+
+            <HorizontalScrollView
+                android:id="@+id/detail_screen_hsv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/detail_safe_layout"
+                android:background="@color/detail_screen_bg"
+                android:padding="5dp"
+                android:scrollbars="none" >
+            </HorizontalScrollView>
+
+            <FrameLayout
+                android:id="@+id/detail_des_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/detail_screen_hsv"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/list_item_bg_normal" >
+            </FrameLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

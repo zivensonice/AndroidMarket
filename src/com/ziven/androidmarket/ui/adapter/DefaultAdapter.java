@@ -24,7 +24,7 @@ public abstract class DefaultAdapter<Data> extends BaseAdapter implements
 	public static final int MORE_VIEW_TYPE = 0;
 	public static final int ITEM_VIEW_TYPE = 1;
 
-	protected AbsListView mListView;// 和该adapter关联的listView
+	protected ListView mListView;// 和该adapter关联的listView
 	private List<BaseHolder> mDisplayedHolders;// 用于记录所有显示的holder
 	private List<Data> mDatas;// adapter的数据集
 	private volatile boolean mIsLoading;
@@ -32,7 +32,7 @@ public abstract class DefaultAdapter<Data> extends BaseAdapter implements
 
 	protected abstract BaseHolder getHolder();
 
-	public DefaultAdapter(AbsListView listView, List<Data> datas) {
+	public DefaultAdapter(ListView listView, List<Data> datas) {
 		mDisplayedHolders = new ArrayList<BaseHolder>();
 		mListView = listView;
 		if (null != listView) {
